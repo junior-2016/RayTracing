@@ -20,7 +20,7 @@ class Shape
 public:
 	virtual bool hit(const Ray& ray, float tmin, float tmax, float time, HitRecord& record) const = 0;
 	//纯虚函数,作为接口,hit接口除了判断是否交叉还返回光线与平面交叉的信息,shadowHit只返回是否交叉.
-	//time参数未知作用,现在只能置0
+	
 	virtual bool shadowHit(const Ray& ray, float tmin, float tmax, float time) const = 0;
 };
 #endif // !SHAPE_H

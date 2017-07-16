@@ -45,6 +45,12 @@
     <ClCompile Include="Camera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DynamicSphere.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="testCamera.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rgb.h">
@@ -90,6 +96,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Sample.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicSphere.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

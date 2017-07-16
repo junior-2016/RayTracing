@@ -43,9 +43,15 @@ Camera::Camera(const Camera& cam)
 /*
 像素位置(pixel_position_x,pixel_position_y)
 映射方法:pixel_position_x=(x+0.5)/nx;
-         pixel_position_x=(y+0.5)/ny;
+         pixel_position_y=(y+0.5)/ny;
+
 rannum_rayOriginXcoord_onAperture和rannum_rayOriginYcoord_onAperture是(0,1)的随机数,
-用来在以center为圆心,lens_radius为半径的照相机光圈上生成随机的光线起始点origin.
+用来在照相机光圈(center为圆心,lens_radius为半径)上生成随机的光线起始点origin.
+
+可以利用原来的正方形Sample算法产生rannum_rayOriginXcoord_onAperture和rannum_rayOriginYcoord_onAperture的数据.
+但是有一点需要注意,因为照相机光圈是圆形区域,一般的实现中把单位正方形上均匀分布的采样点映射到单位圆上,
+也可以把它映射到正多边形上，这样就可以简单模拟出漂亮的bokeh(弥散)效果
+(一开始我就是采用正方形的MultiJitter采样得到了弥散效果).修改采样密度的分布也能获得不同的弥散圆形状.
 */
 Ray Camera::getRay(float pixel_position_x, float pixel_position_y, float rannum_rayOriginXcoord_onAperture,
 	float rannum_rayOriginYcoord_onAperture)
