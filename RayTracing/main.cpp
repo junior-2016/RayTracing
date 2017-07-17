@@ -92,7 +92,7 @@ int main()
 	
 	if (of)
 	{
-		im.writePPM(of);
+		im.writeP3PPM(of);
 	}
 	system("pause");
 	return 0;

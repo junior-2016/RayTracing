@@ -20,8 +20,9 @@ public:
 	bool setColor(int x, int y, rgb & color);
 	rgb getColor(int x, int y)const;
 	//void gammaCorrect(float gamma);//¦ÃÐÞÕý
-	void writePPM(ostream & out,float gamma=2.2f);
-	void readPPM(string file_name,float gamma=2.2f);
+	void writeP6PPM(ostream & out);
+	void readPPM(string file_name);
+	void writeP3PPM(ostream & out);
 };
 #endif // !IMAGE_H
 

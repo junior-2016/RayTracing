@@ -84,10 +84,9 @@ void image::gammaCorrect(float gamma)
  颜色强度值正比于(i/256)^γ(γ在大多PC是2.2).所以f与i的关系是f=(i/256)^γ;
  将f转换为系统图片的颜色分量值表示:i=(int)(256*f^(1/γ)).
  */
-void image::writePPM(ostream & out,float gamma)//第二个参数默认用2.2
+void image::writeP6PPM(ostream & out)//第二个参数默认用2.2
 {
 	out << "P6\n" << nx << " " << ny << "\n255\n";//P6类型的文件存储最终以unsigned char的形式存储.
-	gamma = 1.0f/ gamma;
 	unsigned int i;
 	for (int y = ny - 1;y >= 0;y--)
    //nx代表图片宽度,ny代表图片高度,虽然raster是[nx][ny]储存,
@@ -97,23 +96,25 @@ void image::writePPM(ostream & out,float gamma)//第二个参数默认用2.2
 	{
 		for (int x = 0;x < nx;x++)
 		{
-			raster[x][y] = rgb(pow(raster[x][y].red(), gamma), pow(raster[x][y].green(), gamma),
+			float gamma = 1.0 /2.2 ;
+			raster[x][y] = rgb(pow(raster[x][y].red(), gamma), 
+				pow(raster[x][y].green(), gamma),
 				pow(raster[x][y].blue(), gamma));//先对数据进行gamma修正
-			i = (unsigned int)(256.0f*raster[x][y].red());
+			i = (unsigned int)(256.0*raster[x][y].red());
 			if (i >255) i = 255;
 			out.put((unsigned char)i);
 
-			i= (unsigned int)(256.0f*raster[x][y].green());
+			i= (unsigned int)(256.0*raster[x][y].green());
 			if (i >255) i = 255;
 			out.put((unsigned char)i);
 
-			i= (unsigned int)(256.0f*raster[x][y].blue());
+			i= (unsigned int)(256.0*raster[x][y].blue());
 			if (i >255) i = 255;
 			out.put((unsigned char)i);
 		}
 	}
 }
-void image::readPPM(string file_name,float gamma)
+void image::readPPM(string file_name)
 {
 	ifstream in;
 	in.open(file_name.c_str());
@@ -125,7 +126,6 @@ void image::readPPM(string file_name,float gamma)
 	string fileType, garbage;
 	int x, y, cols, rows;//cols:竖行的数目;rows:横行的数目
 	rgb pixel;
-	int gamma_int = (int)gamma;
 	in >>fileType>> cols >> rows >>garbage;
 	nx = cols;
 	ny = rows;
@@ -146,13 +146,44 @@ void image::readPPM(string file_name,float gamma)
 				in.get(red);
 				in.get(green);
 				in.get(blue);
-				pixel.setRed(pow((((float)((unsigned char)red) + 0.5f) / 256.0f), gamma_int));//这里需要还原gamma修正前的数据
-				pixel.setGreen(pow((((float)((unsigned char)green) + 0.5f) / 256.0f), gamma_int));
-				pixel.setBlue(pow((((float)((unsigned char)blue) + 0.5f) / 256.0f), gamma_int));
+				pixel.setRed(pow((((float)((unsigned char)red) + 0.5) / 256.0),2));
+				pixel.setGreen(pow((((float)((unsigned char)green) + 0.5) / 256.0),2));
+				pixel.setBlue(pow((((float)((unsigned char)blue) + 0.5) / 256.0),2));
 		   //PS:浮点数四舍五入转化为整数:(int)(float+0.5),比如5.6,如果直接(int)5.6=5(直接截取整数部分),
 		   //如果(int)(5.6+0.5)=(int)6.1=6,实现了四舍五入.
 				raster[x][y] = pixel;
 			}
+		}
+	}
+	if (fileType == "P3")
+	{
+		int red, green, blue;
+		for (y = ny - 1; y>= 0; y--)
+			for (x = 0; x < nx; x++)
+			{
+				in >> red >> green >> blue;
+				pixel.setRed( ((float(red) + 0.5) / 256.0) *
+					((float(red) + 0.5) / 256.0));
+				pixel.setGreen( ((float(green) + 0.5) / 256.0) *
+					((float(green) + 0.5) / 256.0));
+				pixel.setBlue(((float(blue) + 0.5) / 256.0) *
+					((float(blue) + 0.5) / 256.0));
+				raster[x][y] = pixel;
+			}
+	}
+}
+void image::writeP3PPM(ostream & out)
+{
+	out << "P3\n" << nx << " " << ny << "\n255\n";
+	for (int y = ny - 1;y >= 0;y--)
+	{
+		for (int x = 0;x < nx;x++)
+		{
+			rgb col = raster[x][y];
+			int ir = (int)(255.99*col.red());
+			int ig = (int)(255.99*col.green());
+			int ib = (int)(255.99*col.blue());
+			out << ir << " " << ig << " " << ib << "\n";
 		}
 	}
 }

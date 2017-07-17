@@ -2,6 +2,7 @@
 #include"Vector2.h"
 #include<cmath>
 #include<cstdlib>
+#define PI 3.14159265358979323846
 Sample::Sample(ULL seed):
 	rm(seed){}
 void Sample::random(Vector2*samples, int num_samples)
@@ -82,4 +83,57 @@ void Sample::multiJitter(Vector2*samples, int num_samples)//综合Jitter与nrooks
 		}
 	}
 
+}
+void Sample::SquareToDisk(Vector2*squareSamples, int num_samples)
+{
+	
+	for (int i = 0;i < num_samples;i++)
+	{
+		float square_x = squareSamples[i].x();
+		float square_y = squareSamples[i].y();
+		
+		square_x = 2.0f * square_x - 1.0f;
+		square_y = 2.0f * square_y - 1.0f;//把x,y坐标变成[-1,1]
+		float phi = 0.0f;
+		float r = 0.0f;
+		if (square_x > -square_y)
+		{
+			if (square_x > square_y)//区域1
+			{
+				r = square_x;
+				phi = (PI / 4.0f)*(square_y / square_x);
+			}
+			else                  //区域2
+			{
+				r = square_y;
+				phi = (PI / 4.0f)*2.0f - (PI / 4.0f)*(square_x / square_y);
+			}
+		}
+		else                         
+		{
+			if (square_x < square_y)  //区域3
+			{
+				r = -square_x;
+				phi = (PI / 4.0f)*4.0f + (PI / 4.0f)*(square_y / square_x);
+			}
+			else                     //区域4
+			{
+				r = -square_y;
+				if (square_y != 0)
+				{
+					phi = (PI / 4.0f)*6.0f - (PI / 4.0f)*(square_x / square_y);
+				}
+				else
+				{
+					phi = 0;
+				}
+			}
+		}
+		float disk_x = r*cos(phi);
+		float disk_y = r*sin(phi);
+		disk_x = (disk_x + 1.0f) / 2.0f;
+		disk_y = (disk_y + 1.0f) / 2.0f;//还原坐标
+		squareSamples[i].setX(disk_x);
+		squareSamples[i].setY(disk_y);
+	}
 }
