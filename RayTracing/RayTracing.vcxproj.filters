@@ -51,6 +51,27 @@
     <ClCompile Include="testCamera.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SolidNoise.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NoiseTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MarbleTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureSphere.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="testTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="NoiseTextureWrap.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageTexture.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rgb.h">
@@ -99,6 +120,33 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="DynamicSphere.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidNoise.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NoiseTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MarbleTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureSphere.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="NoiseTextureWrap.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FBMTexture.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

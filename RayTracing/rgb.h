@@ -115,6 +115,8 @@ inline rgb operator/ (const rgb& c1, const rgb& c2)
 }
 inline rgb operator+ (const rgb& c1, const rgb& c2)
 {
-	return rgb(c1.r + c2.r, c2.g + c2.g, c1.b + c2.b);
+	return rgb(c1.r + c2.r, c1.g + c2.g, c1.b + c2.b);
+	//找到颜色显示issue的bug,
+	//在rgb operator+ ()代码出现错误
 }
 #endif // RGB_H

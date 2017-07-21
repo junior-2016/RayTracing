@@ -17,12 +17,16 @@ public:
 	image(int width, int height);
 	image(int width, int height, rgb background_color);
 	~image();
-	bool setColor(int x, int y, rgb & color);
+	void setColor(int x, int y, rgb & color);
 	rgb getColor(int x, int y)const;
 	//void gammaCorrect(float gamma);//¦ÃÐÞÕý
 	void writeP6PPM(ostream & out);
-	void readPPM(string file_name);
+	void readPPM(char *);
+	
 	void writeP3PPM(ostream & out);
+	int width();
+	int height();
 };
 #endif // !IMAGE_H
+
 

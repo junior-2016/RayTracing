@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -96,6 +97,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -121,13 +123,20 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DynamicSphere.cpp" />
     <ClCompile Include="image.cpp" />
+    <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MarbleTexture.cpp" />
+    <ClCompile Include="NoiseTexture.cpp" />
+    <ClCompile Include="NoiseTextureWrap.cpp" />
     <ClCompile Include="ONB.cpp" />
     <ClCompile Include="RGB.cpp" />
     <ClCompile Include="Sample.cpp" />
     <ClCompile Include="ShapeList.cpp" />
+    <ClCompile Include="SolidNoise.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="testCamera.cpp" />
+    <ClCompile Include="testTexture.cpp" />
+    <ClCompile Include="TextureSphere.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Vector3.cpp" />
   </ItemGroup>
@@ -135,7 +144,12 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicSphere.h" />
+    <ClInclude Include="FBMTexture.h" />
     <ClInclude Include="image.h" />
+    <ClInclude Include="ImageTexture.h" />
+    <ClInclude Include="MarbleTexture.h" />
+    <ClInclude Include="NoiseTexture.h" />
+    <ClInclude Include="NoiseTextureWrap.h" />
     <ClInclude Include="ONB.h" />
     <ClInclude Include="RandomNumber.h" />
     <ClInclude Include="Ray.h" />
@@ -143,8 +157,12 @@
     <ClInclude Include="Sample.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeList.h" />
+    <ClInclude Include="SimpleTexture.h" />
+    <ClInclude Include="SolidNoise.h" />
     <ClInclude Include="sort.h" />
     <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureSphere.h" />
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
