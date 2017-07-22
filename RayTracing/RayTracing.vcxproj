@@ -127,6 +127,8 @@
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MarbleTexture.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshTriangle.cpp" />
     <ClCompile Include="NoiseTexture.cpp" />
     <ClCompile Include="NoiseTextureWrap.cpp" />
     <ClCompile Include="ONB.cpp" />
@@ -149,6 +151,8 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageTexture.h" />
     <ClInclude Include="MarbleTexture.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshTriangle.h" />
     <ClInclude Include="NoiseTexture.h" />
     <ClInclude Include="NoiseTextureWrap.h" />
     <ClInclude Include="ONB.h" />
@@ -167,6 +171,7 @@
     <ClInclude Include="Triangle.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="Vector3.h" />
+    <ClInclude Include="Vertex.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

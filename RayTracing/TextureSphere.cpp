@@ -25,6 +25,7 @@ bool TextureSphere::hit(const Ray& ray, float tmin, float tmax, float time, HitR
 		record.hit_point = r;
 		Vector3 n=record.normal = unitVector(r - center);
 		record.hit_texture = tex;
+
 		//¼ÆËãuv×ø±ê
 		float twopi = 2.0*M_PI;
 		float theta = acos(n.z());
