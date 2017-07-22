@@ -139,6 +139,7 @@
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="testCamera.cpp" />
     <ClCompile Include="testTexture.cpp" />
+    <ClCompile Include="testTriangleMesh.cpp" />
     <ClCompile Include="TextureSphere.cpp" />
     <ClCompile Include="Triangle.cpp" />
     <ClCompile Include="Vector3.cpp" />

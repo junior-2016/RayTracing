@@ -1,3 +1,4 @@
+/*
 #include<iostream>
 #include<cmath>
 #include<string>
@@ -29,7 +30,7 @@ int main()
 	image im(nx, ny);
 	int sam_num = 1;
 	RandomNumber rm((ULL)time(NULL));
-
+*/
 	/*
 	注意进行纹理测试时最好不要使用之前对光线点的采样处理方法！！！否则进行纹理时产生的图片会比较模糊.
 	可以使用Camera类的另一个重载函数getRay(float,float),这个重载函数固定光线起始点为相机中心点.
@@ -65,7 +66,7 @@ int main()
 	//因为物体是球体,所以把照相机按同等距离旋转到球的左边也可以,这个时候需要改变第一个参数:照相机的起始点,以及第二个参数:gaze向量(=物体中心坐标-照相机坐标)
 	//此时Camera的配置是:Camera cam(Vector3(-1000,0,-1000), Vector3(1000, 0,0), Vector3(0, 1, 0), 50, -300,300,300, -300, 1000);
 	//以后熟练了后就不需要再利用上面的配置了
-
+/*
 	Camera cam(Vector3(0,0,0), Vector3(0,0,-1000), Vector3(0, 1, 0), 50, -600, 600, 600, -600, 1000);
 
 	ShapeList shapes;
@@ -92,7 +93,7 @@ int main()
 			    Ray r = cam.getRay(pixel_x, pixel_y);
 				//因为是与纹理相关,getRay方法使用第二个,不进行光线点采样,否则贴图会模糊.
 				//同时这里需要设置sam_num=1(既不破坏原来的代码结构也不会引入采样)
-				
+
 			    is_hit = shapes.hit(r, 0.00001f, tmax,0.0, record);
 				
 			    if (is_hit)
@@ -108,27 +109,7 @@ int main()
 	  }
    }
  
-	/*
-	for (int i = 0;i < nx;i++)
-	{
-		for (int j = 0;j <ny;j++)
-		{
-
-			rgb total_color(0.0f, 0.0f, 0.0f);
-			float tmax = 100000.0f;
-			bool is_hit = false;
-			Ray r(Vector3(0,j,-i),Vector3(1,0,0));
-			HitRecord record;
-            is_hit = shapes.hit(r, 0.00001f, tmax, 0, record);
-
-			if (is_hit) total_color += record.hit_texture->value(record.uv, record.hit_point);
-			else total_color += rgb(0.5294, 0.8078, 0.9216);
-			
-			im.setColor(i, j, total_color);
-			
-		}
-	}
-	*/
+	
 		ofstream of("F:\\VisualStudio Project\\ComputerGraphic\\RayTracing\\image\\MarbleTextureSphere.ppm");
         if (of)
 		{
@@ -141,3 +122,4 @@ int main()
 		system("pause");
 		return 0;
 }
+*/
