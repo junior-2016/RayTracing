@@ -24,35 +24,52 @@
 using namespace std;
 int main()
 {
-	int nx = 500;
-	int ny = 500;
+	int nx = 1024;
+	int ny = 1024;
 	image im(nx, ny);
-	int sam_num = 16;
-	
-	//NoiseTexture的特点,参数scale从1.0逐渐降低,纹理条纹越明显(最好在0.01,0.02,0.05,0.1x等较小的浮点数比较明显)
-	//Texture * tex = new NoiseTexture(0.05);
-
-	//NoiseTextureWrap的特点,scale设置在0.01,0.02,0.05,...之间(较小浮点数),然后expansion参数设置为4,8等就有明显效果.
-	Texture *tex = new NoiseTextureWrap(8,0.01);
-    //Texture * tex = new NoiseTextureWrap(8, 0.02);
+	int sam_num = 1;
+	RandomNumber rm((ULL)time(NULL));
 
 	/*
-	测试MarbleTexture:
+	注意进行纹理测试时最好不要使用之前对光线点的采样处理方法！！！否则进行纹理时产生的图片会比较模糊.
+	可以使用Camera类的另一个重载函数getRay(float,float),这个重载函数固定光线起始点为相机中心点.
+	同时注意要设置sam_num为1.
+	*/
+
+	//NoiseTexture的特点,参数scale从1.0逐渐降低,纹理条纹越明显(最好在0.01,0.02,0.05,0.1x等较小的浮点数比较明显)
+	//Texture * tex = new NoiseTexture(0.02);
+
+	//NoiseTextureWrap的特点,scale设置在0.01,0.02,0.05,...之间(较小浮点数),然后expansion参数设置为4,8等就有明显效果.
+	//Texture *tex = new NoiseTextureWrap(8,0.01);
+    //Texture * tex = new NoiseTextureWrap(8, 0.02);
+
+	
+	//测试MarbleTexture:
+	/*
 	char * file_name = "F:\\VisualStudio Project\\ComputerGraphic\\RayTracing\\srcImage\\BlueMarbleRamp.ppm";
 	image * MarbleImg = new image();
 	MarbleImg->readPPM(file_name);
-	Texture * tex = new MarbleTexture(MarbleImg,8);//第二个参数为噪声缩放系数,如果设置为0则没有噪声影响
+	Texture * tex = new MarbleTexture(MarbleImg,8,6,0.75,2);//第二个参数为噪声缩放系数,如果设置为0则没有噪声影响
 	*/
-	ShapeList shapes;
+	
+	//测试图片纹理(ImageTexture)
+	//无意中发现一个特殊的纹理效果,在图片纹理中使用随机数rm()对光线起始点采样可能会有玻璃模糊效果
+	/*
+	char * file_name = "E:\\FFOutput\\111.ppm";
+	Texture * tex = new ImageTexture(file_name);
+	*/
 
-	//以后比较合适的Camera的配置是:
-	//Camera cam(Vector3(0, 0, 0), Vector3(0, 0, -1000), Vector3(0, 1, 0), 50, -300,300,300, -300, 1000);
+	//以后比较合适的Camera的配置范例是:
+	//Camera cam(Vector3(0, 0, 0), Vector3(0, 0, -1000), Vector3(0, 1, 0), 50, -300,300,300,-300, 1000);
 	//然后把物体放在Vector(0,0,-1000),半径大概在(200,250)以内.
 	//因为物体是球体,所以把照相机按同等距离旋转到球的左边也可以,这个时候需要改变第一个参数:照相机的起始点,以及第二个参数:gaze向量(=物体中心坐标-照相机坐标)
 	//此时Camera的配置是:Camera cam(Vector3(-1000,0,-1000), Vector3(1000, 0,0), Vector3(0, 1, 0), 50, -300,300,300, -300, 1000);
-	
-	Camera cam(Vector3(0, 0, 0), Vector3(0, 0, -1000), Vector3(0, 1, 0), 50, -300, 300, 300, -300, 1000);
-	shapes.add(new TextureSphere(Vector3(0, 0, -1000), 200, tex));
+	//以后熟练了后就不需要再利用上面的配置了
+
+	Camera cam(Vector3(0,0,0), Vector3(0,0,-1000), Vector3(0, 1, 0), 50, -600, 600, 600, -600, 1000);
+
+	ShapeList shapes;
+	shapes.add(new TextureSphere(Vector3(0,0, -1000),500, tex));
 
 	for (int i = 0;i <nx;i++)
 	{
@@ -72,21 +89,47 @@ int main()
 				HitRecord record;
 			    bool is_hit = false;
 			    float tmax = 100000.0f;
-			    Ray r = cam.getRay(pixel_x, pixel_y, samples[k].x(),samples[k].y());
+			    Ray r = cam.getRay(pixel_x, pixel_y);
+				//因为是与纹理相关,getRay方法使用第二个,不进行光线点采样,否则贴图会模糊.
+				//同时这里需要设置sam_num=1(既不破坏原来的代码结构也不会引入采样)
 				
 			    is_hit = shapes.hit(r, 0.00001f, tmax,0.0, record);
+				
 			    if (is_hit)
 			       total_color += record.hit_texture->value(record.uv,record.hit_point);
 			    else
 			    {
 					total_color += rgb(0.5294,0.8078,0.9216);
 			    }
+				
 			}
-			   im.setColor(i, j, total_color / sam_num);
-			   delete[]samples;
+			   im.setColor(i, j,total_color/sam_num);
+			   delete[] samples;
 	  }
    }
-		ofstream of("F:\\VisualStudio Project\\ComputerGraphic\\RayTracing\\image\\NoiseTextureWrapSphere.ppm");
+ 
+	/*
+	for (int i = 0;i < nx;i++)
+	{
+		for (int j = 0;j <ny;j++)
+		{
+
+			rgb total_color(0.0f, 0.0f, 0.0f);
+			float tmax = 100000.0f;
+			bool is_hit = false;
+			Ray r(Vector3(0,j,-i),Vector3(1,0,0));
+			HitRecord record;
+            is_hit = shapes.hit(r, 0.00001f, tmax, 0, record);
+
+			if (is_hit) total_color += record.hit_texture->value(record.uv, record.hit_point);
+			else total_color += rgb(0.5294, 0.8078, 0.9216);
+			
+			im.setColor(i, j, total_color);
+			
+		}
+	}
+	*/
+		ofstream of("F:\\VisualStudio Project\\ComputerGraphic\\RayTracing\\image\\MarbleTextureSphere.ppm");
         if (of)
 		{
 			im.writeP3PPM(of);

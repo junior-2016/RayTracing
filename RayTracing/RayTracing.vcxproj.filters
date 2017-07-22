@@ -72,6 +72,9 @@
     <ClCompile Include="ImageTexture.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="FBMNoise.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="rgb.h">
@@ -146,7 +149,7 @@
     <ClInclude Include="ImageTexture.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="FBMTexture.h">
+    <ClInclude Include="FBMNoise.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

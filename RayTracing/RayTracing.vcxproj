@@ -122,6 +122,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DynamicSphere.cpp" />
+    <ClCompile Include="FBMNoise.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="ImageTexture.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,7 +145,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="DynamicSphere.h" />
-    <ClInclude Include="FBMTexture.h" />
+    <ClInclude Include="FBMNoise.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageTexture.h" />
     <ClInclude Include="MarbleTexture.h" />

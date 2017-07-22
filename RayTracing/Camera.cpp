@@ -67,3 +67,9 @@ Ray Camera::getRay(float pixel_position_x, float pixel_position_y, float rannum_
 	*/
 	return Ray(origin, unitVector(target - origin));
 }
+Ray Camera::getRay(float pixel_position_x, float pixel_position_y)
+{
+	Vector3 origin = center;
+	Vector3 target = image_plane_corner + pixel_position_x*image_plane_uVector + pixel_position_y*image_plane_vVector;
+	return Ray(origin, unitVector(target - origin));
+}

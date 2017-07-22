@@ -3,6 +3,7 @@
 #include"Texture.h"
 #include"rgb.h"
 #include"SolidNoise.h"
+#include"FBMNoise.h"
 #include<cmath>
 #include<ctime>
 class NoiseTexture:public Texture //NoiseTexture是基于基本固体噪声的纹理
