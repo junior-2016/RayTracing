@@ -1,0 +1,21 @@
+1,最近在进行Qt平台的迁移,打算利用Qt搭载界面.
+2,Qt在Windows的迁移需要:
+A,在命令行使用:qmake -tp vc XXX.pro变成VS工程.
+B,用Release模式编译(Debug模式会出错)
+C,把平台相关的核心动态库:
+在E:\Qt5.9\5.9\msvc2015_64\bin寻找
+Qt5Core.dll,Qt5Gui.dll,Qt5Widgets.dll
+放在release目录下
+在E:\Qt5.9\5.9\msvc2015_64\plugins\里面寻找platforms文件夹,
+把整一个platforms文件夹放在release文件夹.
+
+基本的文件结构:
+release|
+        xxx.exe
+	    xxx.dll
+	    ...
+	   |platforms
+
+3,好像把QT工程变成VS工程后不能自动把ui文件生成.h文件,
+如果实在不行可以考虑手动更新:在命令行使用
+uic -o ui_mainwindow.h mainwindow.ui

@@ -152,6 +152,7 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="ImageTexture.h" />
     <ClInclude Include="MarbleTexture.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshTriangle.h" />
     <ClInclude Include="NoiseTexture.h" />
